@@ -1,0 +1,61 @@
+---
+title: "Data_manipulation"
+author: "Arielle"
+date: "9/19/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library (tidyverse)
+```
+
+```{r}
+litters_data = read_csv(file ="./data/FAS_litters.csv")
+litters_data = janitor::clean_names(litters_data)
+pups_data = read_csv(file="./data/FAS_pups.csv")
+pups_data = janitor::clean_names(pups_data)
+```
+
+```{r}
+## These are only for selecting columns 
+select(litters_data, group, litter_number, gd0_weight, pups_born_alive)
+
+select(litters_data, group, litter_number, gd0_weight, pups_born_alive)
+
+select(litters_data, -pups_survive)
+
+##this is 
+select(litters_data, GROUP = group, LiTtEr_NuMbEr = litter_number)
+
+#renaming a variable 
+rename(litters_data, GROUP = group, LiTtEr_NuMbEr = litter_number)
+```
+
+##Filtering
+
+```{r}
+filter(litters_data, group == "Con7")
+
+## double equql, ask a question, is this value equal to the this other value, asking a logical question 
+
+filter(litters_data, group == "Mod8")
+filter(litters_data, gd_of_birth == 20)
+filter(litters_data, gd_of_birth <20)
+filter(litters_data, gd_of_birth >= 20)
+filter(litters_data, pups_born_alive < 6)
+filter(litters_data, pups_born_alive < 6, group == "Con7")
+
+# ! is a not sign ! = not equal 
+
+# Or - the two codes will give the same value 
+filter(litters_data, group == "Con7"| group == "Mod8")
+
+filter(litters_data, group == "Con7"| group == "Mod8")
+
+#Missing Values
+drop_na(litters_data)
+drop_na(litters_data, gd0_weight)
+
+```
+
