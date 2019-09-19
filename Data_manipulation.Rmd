@@ -2,7 +2,7 @@
 title: "Data_manipulation"
 author: "Arielle"
 date: "9/19/2019"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
