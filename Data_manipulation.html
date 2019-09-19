@@ -540,6 +540,52 @@ arrange(litters_data, desc(pups_born_alive))</code></pre>
 ## # … with 39 more rows, and 2 more variables: pups_dead_birth &lt;dbl&gt;,
 ## #   pups_survive &lt;dbl&gt;</code></pre>
 </div>
+<div id="piping" class="section level2">
+<h2>Piping</h2>
+<p>Pipe it up, pipe it up</p>
+<pre class="r"><code>litters_data=
+  read_csv(&quot;./data/FAS_litters.csv&quot;) %&gt;% 
+  janitor :: clean_names () %&gt;% 
+  select (-pups_survive) %&gt;% 
+  mutate (
+    wt_gain = gd18_weight -gd0_weight,
+    group = str_to_lower (group)) %&gt;% 
+  drop_na(gd0_weight)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Group = col_character(),
+##   `Litter Number` = col_character(),
+##   `GD0 weight` = col_double(),
+##   `GD18 weight` = col_double(),
+##   `GD of Birth` = col_double(),
+##   `Pups born alive` = col_double(),
+##   `Pups dead @ birth` = col_double(),
+##   `Pups survive` = col_double()
+## )</code></pre>
+<pre class="r"><code>litters_data %&gt;% view()</code></pre>
+</div>
+<div id="dont-worry-about-this-now" class="section level1">
+<h1>Dont worry about this now</h1>
+<pre class="r"><code>litters_data=
+  read_csv(&quot;./data/FAS_litters.csv&quot;) %&gt;% 
+  janitor :: clean_names (dat = .) %&gt;% 
+  select (.data = ., -pups_survive) %&gt;% 
+  mutate (
+    wt_gain = gd18_weight -gd0_weight,
+    group = str_to_lower (group)) %&gt;% 
+  drop_na(gd0_weight)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Group = col_character(),
+##   `Litter Number` = col_character(),
+##   `GD0 weight` = col_double(),
+##   `GD18 weight` = col_double(),
+##   `GD of Birth` = col_double(),
+##   `Pups born alive` = col_double(),
+##   `Pups dead @ birth` = col_double(),
+##   `Pups survive` = col_double()
+## )</code></pre>
+</div>
 
 
 
